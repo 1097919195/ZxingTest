@@ -140,24 +140,24 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
 
-        if(requestCode==SELECT_IMAGE_REQUEST_CODE){//从图库选择图片
+        if (requestCode == SELECT_IMAGE_REQUEST_CODE && intent != null) {//从图库选择图片
             String[] proj = {MediaStore.Images.Media.DATA};
             // 获取选中图片的路径
-            Cursor cursor = this.getContentResolver().query(intent.getData(),proj, null, null, null);
+            Cursor cursor = this.getContentResolver().query(intent.getData(), proj, null, null, null);
             if (cursor.moveToFirst()) {
                 int columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
                 String photoPath = cursor.getString(columnIndex);
-                String result= BitmapUtil.parseQRcode(photoPath);
+                String result = BitmapUtil.parseQRcode(photoPath);
                 if (!TextUtils.isEmpty(result)) {
-                    showToast("从图库选择的图片识别结果:"+result);
+                    showToast("从图库选择的图片识别结果:" + result);
                 } else {
                     showToast("从图库选择的图片不是二维码图片");
                 }
             }
             cursor.close();
-        }else if (requestCode == SCAN_REQUEST_CODE && resultCode == RESULT_OK) {
+        } else if (requestCode == SCAN_REQUEST_CODE && resultCode == RESULT_OK) {
             String input = intent.getStringExtra(ScanActivity.INTENT_EXTRA_RESULT);
-            showToast("扫描结果:"+input);
+            showToast("扫描结果:" + input);
         }
     }
 
