@@ -92,11 +92,17 @@ public final class CameraManager {
         final int topOffset = (surfaceHeight - frameSize) / 2;
         frame = new Rect(leftOffset, topOffset, leftOffset + frameSize,
                 topOffset + frameSize);
+        //扫描范围是矩形框
         framePreview = new Rect(frame.left * cameraResolution.height
                 / surfaceWidth, frame.top * cameraResolution.width
                 / surfaceHeight, frame.right * cameraResolution.height
                 / surfaceWidth, frame.bottom * cameraResolution.width
                 / surfaceHeight);
+
+        //扫描范围为全屏
+//        framePreview = new Rect(0, 0, surfaceWidth * cameraResolution.height
+//                / surfaceWidth, surfaceHeight * cameraResolution.width
+//                / surfaceHeight);
 
         final String savedParameters = parameters == null ? null : parameters
                 .flatten();

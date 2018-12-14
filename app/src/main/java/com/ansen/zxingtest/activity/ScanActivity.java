@@ -28,6 +28,8 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.FrameLayout;
@@ -79,6 +81,7 @@ public class ScanActivity extends AppCompatActivity implements SurfaceHolder.Cal
     private Handler cameraHandler;
 
     private boolean fromGallery;
+    private ImageView scanLine;
 
     private static boolean DISABLE_CONTINUOUS_AUTOFOCUS = Build.MODEL.equals("GT-I9100") //
             // Galaxy S2
@@ -93,6 +96,8 @@ public class ScanActivity extends AppCompatActivity implements SurfaceHolder.Cal
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_scan);
+
+        scanLine = (ImageView) findViewById(R.id.capture_scan_line);
 
         vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
@@ -111,6 +116,13 @@ public class ScanActivity extends AppCompatActivity implements SurfaceHolder.Cal
         TextView tvTopRight=findViewById(R.id.tv_top_right);
         tvTopRight.setText(R.string.album_text);
         findViewById(R.id.view_top_right).setOnClickListener(onClickListener);
+
+        TranslateAnimation animation = new TranslateAnimation(Animation.RELATIVE_TO_PARENT, 0.0f, Animation.RELATIVE_TO_PARENT, 0.0f, Animation.RELATIVE_TO_PARENT, 0.25f, Animation.RELATIVE_TO_PARENT,
+                0.7f);
+        animation.setDuration(4000);
+        animation.setRepeatCount(-1);
+        animation.setRepeatMode(Animation.RESTART);
+        scanLine.startAnimation(animation);
     }
 
     public void setOverlay(View v) {
