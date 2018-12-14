@@ -22,6 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
+        <!--这里是一种固定的形式，只为实现功能——待优化-->
         <ImageView
             android:layout_marginLeft="39dp"
             android:layout_marginRight="39dp"
